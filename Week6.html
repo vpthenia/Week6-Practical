@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>test</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script> 
+</head>
+<body>
+<div id="top">
+	<label for="search">Search: </label>
+	<input id="search" type="text" v-model="search">
+	<div id="another">
+	<form id="myform">
+	<h3>Form User</h3>
+	<label for="name">Name: </label><br><br>
+	<input id="name" v-model.trim="username" type="text" placeholder="Myname"> <br><br>
+	<p>Username: {{username}}</p>
+
+	<label for="password">Password: </label><br><br>
+	<input id="password" v-model="password" type="password" placeholder="******"> <br><br>
+
+	<label for="email">Email: </label><br><br>
+	<input id="email" v-model="email" type="text" placeholder="example@gmail.com"> <br><br>
+
+	<button v-on:click="checkInput">Submit</button>
+	</form>
+	</div>
+	<div id="checkboxes">
+	  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+	  <label for="jack">Jack</label>
+	  <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+	  <label for="john">John</label>
+	  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+	  <label for="mike">Mike</label>
+	  <br />
+	  <span>Checked names: {{ checkedNames }}</span>
+	  </div>
+	  <br><br>
+	  
+	  <div id="dynamic">
+	<select v-model="selected">
+	<option v-for="option in options" v-bind:value="option.value">
+    {{ option.text }}
+	</option>
+	</select>
+	<span>Selected: {{ selected }}</span>
+	  
+	
+</div>
+<script>
+
+
+var form = new Vue({
+	el:"#myform",
+	data:{
+		username:'',
+		password:'',
+		email:'',
+		search:'',
+		//searchapp:'',
+
+	
+	},
+	methods: {
+		checkInput: function() {
+			var str ='';
+			if (this.username) {
+				str = str + "username: " + this.username; 
+			}
+			if (this.password) {
+				str = str + "password: " + this.password;
+			}
+			if (this.email) {
+				str = str + "email: " + this.email;
+			}
+			if (str) {
+				alert(str)
+			} else {
+				alert("Please input required information.")
+			}
+		
+		}	
+	
+	}
+
+})
+
+var app = new Vue({
+  el: "#checkboxes",
+  data: {
+    checkedNames:[],
+	//searchapp:'',
+    
+  }  
+  
+})
+new Vue({
+  el: '#dynamic',
+  data: {
+    selected: 'A',
+    options: [
+      { text: 'One', value: 'A' },
+      { text: 'Two', value: 'B' },
+      { text: 'Three', value: 'C' }
+    ]
+  }
+})
+
+</script>
+
+</body>
+</html>
